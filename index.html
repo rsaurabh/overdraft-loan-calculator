@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hybrid Overdraft Home Loan Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --surface2: #f1f0ec;
+      --border: rgba(0,0,0,0.12);
+      --border2: rgba(0,0,0,0.22);
+      --text: #1a1a18;
+      --text2: #5f5e5a;
+      --text3: #888780;
+      --green: #0f6e56;
+      --green-bg: #e1f5ee;
+      --red: #993c1d;
+      --red-bg: #faece7;
+      --blue: #185fa5;
+      --blue-bg: #e6f1fb;
+      --amber: #ba7517;
+      --amber-bg: #faeeda;
+      --radius: 10px;
+      --radius-sm: 7px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --surface: #252523;
+        --surface2: #2e2e2b;
+        --border: rgba(255,255,255,0.1);
+        --border2: rgba(255,255,255,0.2);
+        --text: #f0efe9;
+        --text2: #a8a79f;
+        --text3: #6e6d67;
+        --green: #5dcaa5;
+        --green-bg: #04342c;
+        --red: #f0997b;
+        --red-bg: #4a1b0c;
+        --blue: #85b7eb;
+        --blue-bg: #042c53;
+        --amber: #ef9f27;
+        --amber-bg: #412402;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .logo {
+      width: 36px; height: 36px;
+      background: var(--blue-bg);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 18px;
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 13px; color: var(--text2); }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 14px;
+    }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+    @media (max-width: 640px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: 1fr 1fr; }
+      .grid4 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .field label {
+      font-size: 12px;
+      color: var(--text2);
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 0.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: auto;
+    }
+
+    input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,95,165,0.12); }
+
+    .metric {
+      background: var(--surface2);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+    }
+    .metric .lbl { font-size: 11px; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+    .metric .val { font-size: 21px; font-weight: 600; }
+    .val.green { color: var(--green); }
+    .val.red { color: var(--red); }
+    .val.blue { color: var(--blue); }
+    .val.amber { color: var(--amber); }
+
+    .tabs {
+      display: flex; gap: 4px;
+      background: var(--surface2);
+      border-radius: var(--radius-sm);
+      padding: 3px;
+      margin-bottom: 1rem;
+    }
+    .tab {
+      flex: 1; padding: 7px 12px; font-size: 13px;
+      border: none; background: transparent;
+      border-radius: 5px; cursor: pointer;
+      color: var(--text2); font-family: inherit;
+      transition: all 0.15s;
+    }
+    .tab.active {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      color: var(--text); font-weight: 500;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .tx-grid {
+      display: grid;
+      grid-template-columns: 110px 1fr 110px 110px 100px 36px;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .tx-header {
+      display: grid;
+      grid-template-columns: 110px 1fr 110px 110px 100px 36px;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .tx-header span { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    @media (max-width: 640px) {
+      .tx-grid, .tx-header { grid-template-columns: 90px 1fr 95px 90px 80px 30px; gap: 5px; }
+    }
+
+    .btn-add {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; font-size: 13px;
+      border: 0.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      background: transparent; cursor: pointer;
+      color: var(--text2); font-family: inherit;
+      margin-top: 4px; transition: background 0.15s;
+    }
+    .btn-add:hover { background: var(--surface2); }
+
+    .btn-del {
+      width: 30px; height: 30px;
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      background: transparent; cursor: pointer;
+      color: var(--text3); font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: inherit; transition: all 0.15s;
+    }
+    .btn-del:hover { border-color: var(--red); color: var(--red); }
+
+    .btn-calc {
+      width: 100%;
+      padding: 12px;
+      background: var(--text);
+      color: var(--surface);
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity 0.15s;
+      margin-top: 4px;
+    }
+    .btn-calc:hover { opacity: 0.85; }
+
+    .divider { border: none; border-top: 0.5px solid var(--border); margin: 1.25rem 0; }
+
+    .info-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; padding: 7px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .k { color: var(--text2); }
+    .info-row .v { font-weight: 600; }
+
+    .period-toggle { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .pt-btn {
+      padding: 5px 13px; font-size: 12px;
+      border: 0.5px solid var(--border2);
+      border-radius: 99px;
+      background: transparent; cursor: pointer;
+      color: var(--text2); font-family: inherit;
+      transition: all 0.15s;
+    }
+    .pt-btn.active {
+      background: var(--text);
+      color: var(--surface);
+      border-color: transparent;
+    }
+
+    .chart-wrap { position: relative; width: 100%; height: 260px; }
+
+    .ledger-wrap { overflow-x: auto; }
+    table.ledger { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 680px; }
+    table.ledger th {
+      font-size: 11px; color: var(--text3); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      text-align: left; padding: 7px 10px;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--surface2);
+    }
+    table.ledger td {
+      padding: 7px 10px;
+      border-bottom: 0.5px solid var(--border);
+      font-variant-numeric: tabular-nums;
+    }
+    table.ledger tr:last-child td { border-bottom: none; }
+    table.ledger tr:hover td { background: var(--surface2); }
+
+    .badge {
+      font-size: 11px; padding: 2px 8px;
+      border-radius: 99px; font-weight: 600;
+      display: inline-block;
+    }
+    .badge.deposit { background: var(--green-bg); color: var(--green); }
+    .badge.withdraw { background: var(--red-bg); color: var(--red); }
+    .badge.emi { background: var(--blue-bg); color: var(--blue); }
+
+    .note {
+      font-size: 12px; color: var(--text3);
+      margin-top: 10px; line-height: 1.6;
+      display: flex; gap: 6px; align-items: flex-start;
+    }
+    .note i { margin-top: 1px; flex-shrink: 0; }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; font-size: 12px; color: var(--text2); }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    footer {
+      text-align: center; font-size: 12px;
+      color: var(--text3); padding: 2rem 1rem;
+      border-top: 0.5px solid var(--border);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><i class="ti ti-home-dollar"></i></div>
+  <div>
+    <h1>Hybrid Overdraft Loan Calculator</h1>
+    <p>Daily interest · Deposit & withdraw anytime · True overdraft simulation</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Loan Setup -->
+  <div class="card">
+    <div class="section-title">Loan setup</div>
+    <div class="grid3" style="margin-bottom:14px;">
+      <div class="field"><label>Loan amount (₹)</label><input type="number" id="loanAmt" value="5000000" min="0" step="100000"></div>
+      <div class="field"><label>Annual interest rate (%)</label><input type="number" id="rate" value="8.5" min="0" max="30" step="0.05"></div>
+      <div class="field"><label>Loan tenure (years)</label><input type="number" id="tenure" value="20" min="1" max="40"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>Loan start date</label><input type="date" id="startDate" value="2024-01-01"></div>
+      <div class="field"><label>Simulation period</label>
+        <select id="simPeriod">
+          <option value="3">3 months</option>
+          <option value="6" selected>6 months</option>
+          <option value="12">12 months</option>
+          <option value="24">24 months</option>
+          <option value="36">36 months</option>
+          <option value="60">5 years</option>
+        </select>
+      </div>
+      <div class="field"><label>EMI type</label>
+        <select id="emiType" onchange="document.getElementById('customEmiRow').style.display=this.value==='custom'?'block':'none'">
+          <option value="fixed">Fixed EMI (auto-calculated)</option>
+          <option value="custom">Custom EMI amount</option>
+        </select>
+      </div>
+    </div>
+    <div id="customEmiRow" style="display:none; margin-top:14px;">
+      <div class="grid3">
+        <div class="field"><label>Custom monthly EMI (₹)</label><input type="number" id="customEmi" value="45000" step="1000"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transactions -->
+  <div class="card">
+    <div class="section-title">Deposits &amp; withdrawals</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTxMode('day')"><i class="ti ti-calendar-event"></i> By specific date</button>
+      <button class="tab" onclick="switchTxMode('month')"><i class="ti ti-calendar-stats"></i> By month number</button>
+    </div>
+
+    <div id="txDay" class="tab-content active">
+      <div class="tx-header">
+        <span>Date</span><span>Description</span><span>Type</span><span>Amount (₹)</span><span>Recurring?</span><span></span>
+      </div>
+      <div id="txDayList"></div>
+      <button class="btn-add" onclick="addTx('day')"><i class="ti ti-plus"></i> Add transaction</button>
+    </div>
+
+    <div id="txMonth" class="tab-content">
+      <div class="tx-header">
+        <span>Month #</span><span>Description</span><span>Type</span><span>Amount (₹)</span><span>Recurring?</span><span></span>
+      </div>
+      <div id="txMonthList"></div>
+      <button class="btn-add" onclick="addTx('month')"><i class="ti ti-plus"></i> Add transaction</button>
+    </div>
+
+    <p class="note"><i class="ti ti-info-circle"></i> Deposits parked in the account reduce your effective principal, lowering daily interest. Withdrawals increase it. Recurring = repeats every month from that date/month.</p>
+  </div>
+
+  <button class="btn-calc" onclick="calculate()"><i class="ti ti-calculator"></i> Calculate overdraft simulation</button>
+
+  <!-- Results -->
+  <div id="results" style="display:none; margin-top:1.25rem;">
+
+    <div class="card">
+      <div class="section-title">Summary</div>
+      <div class="grid4" style="margin-bottom:1.25rem;">
+        <div class="metric"><div class="lbl">Monthly EMI</div><div class="val blue" id="rEmi">—</div></div>
+        <div class="metric"><div class="lbl">Interest saved</div><div class="val green" id="rSaved">—</div></div>
+        <div class="metric"><div class="lbl">Effective rate p.a.</div><div class="val amber" id="rEffRate">—</div></div>
+        <div class="metric"><div class="lbl">Avg working balance</div><div class="val" id="rAvgBal">—</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="grid2">
+        <div>
+          <div class="info-row"><span class="k">Loan amount</span><span class="v" id="iLoan">—</span></div>
+          <div class="info-row"><span class="k">Standard interest (period)</span><span class="v" id="iStdInt">—</span></div>
+          <div class="info-row"><span class="k">Overdraft interest (period)</span><span class="v" id="iOdInt">—</span></div>
+          <div class="info-row"><span class="k">Total days simulated</span><span class="v" id="iDays">—</span></div>
+        </div>
+        <div>
+          <div class="info-row"><span class="k">Total deposited</span><span class="v green" id="iTotDep">—</span></div>
+          <div class="info-row"><span class="k">Total withdrawn</span><span class="v red" id="iTotWith">—</span></div>
+          <div class="info-row"><span class="k">Net balance parked</span><span class="v" id="iNetBal">—</span></div>
+          <div class="info-row"><span class="k">Months simulated</span><span class="v" id="iMonths">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Charts</div>
+      <div class="period-toggle">
+        <button class="pt-btn active" onclick="switchChart('balance', this)">Loan balance</button>
+        <button class="pt-btn" onclick="switchChart('interest', this)">Daily interest</button>
+        <button class="pt-btn" onclick="switchChart('savings', this)">Cumulative savings</button>
+      </div>
+      <div id="chartLegend" class="legend"></div>
+      <div class="chart-wrap">
+        <canvas id="mainChart" role="img" aria-label="Loan simulation chart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Daily ledger</div>
+      <div class="period-toggle" id="ledgerFilter">
+        <button class="pt-btn active" onclick="filterLedger('all', this)">All days</button>
+        <button class="pt-btn" onclick="filterLedger('tx', this)">Transaction days only</button>
+        <button class="pt-btn" onclick="filterLedger('month', this)">Month-end only</button>
+      </div>
+      <div class="ledger-wrap">
+        <table class="ledger" id="ledgerTable">
+          <thead><tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Working balance (₹)</th>
+            <th>Effective principal (₹)</th>
+            <th>Daily interest (₹)</th>
+            <th>Loan balance (₹)</th>
+          </tr></thead>
+          <tbody id="ledgerBody"></tbody>
+        </table>
+      </div>
+      <p class="note" id="ledgerNote" style="display:none"><i class="ti ti-alert-circle"></i> Showing a sampled subset for performance. Switch to "Transaction days only" or "Month-end only" to see all entries.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Hybrid Overdraft Loan Calculator &mdash; Daily interest model &mdash; For illustration purposes only. Consult your bank for exact terms.
+</footer>
+
+<script>
+  let ledgerData = [], chartInstance = null;
+
+  function switchTxMode(mode) {
+    document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', (i === 0 && mode === 'day') || (i === 1 && mode === 'month')));
+    document.getElementById('txDay').classList.toggle('active', mode === 'day');
+    document.getElementById('txMonth').classList.toggle('active', mode === 'month');
+  }
+
+  function addTx(mode) {
+    const list = document.getElementById(mode === 'day' ? 'txDayList' : 'txMonthList');
+    const id = 'tx_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    const row = document.createElement('div');
+    row.className = 'tx-grid';
+    row.id = id;
+    if (mode === 'day') {
+      row.innerHTML = `
+        <input type="date" value="2024-02-01">
+        <input type="text" placeholder="e.g. Salary credit">
+        <select><option value="deposit">Deposit</option><option value="withdraw">Withdraw</option></select>
+        <input type="number" value="50000" min="0" step="1000">
+        <select><option value="no">One-time</option><option value="yes">Monthly recurring</option></select>
+        <button class="btn-del" onclick="document.getElementById('${id}').remove()" title="Remove"><i class="ti ti-x"></i></button>`;
+    } else {
+      row.innerHTML = `
+        <input type="number" value="1" min="1" max="600" placeholder="Month #">
+        <input type="text" placeholder="e.g. Annual bonus">
+        <select><option value="deposit">Deposit</option><option value="withdraw">Withdraw</option></select>
+        <input type="number" value="100000" min="0" step="5000">
+        <select><option value="no">One-time</option><option value="yes">Monthly recurring</option></select>
+        <button class="btn-del" onclick="document.getElementById('${id}').remove()" title="Remove"><i class="ti ti-x"></i></button>`;
+    }
+    list.appendChild(row);
+  }
+
+  function parseTxDay(startDate, months) {
+    const out = [], end = new Date(startDate);
+    end.setMonth(end.getMonth() + months);
+    document.querySelectorAll('#txDayList .tx-grid').forEach(r => {
+      const inp = r.querySelectorAll('input, select');
+      const date = new Date(inp[0].value);
+      if (isNaN(date.getTime())) return;
+      const desc = inp[1].value || 'Transaction';
+      const type = inp[2].value;
+      const amt = parseFloat(inp[3].value) || 0;
+      const recurring = inp[4].value === 'yes';
+      if (recurring) {
+        let d = new Date(date);
+        while (d < end) { out.push({ date: new Date(d), desc, type, amt }); d.setMonth(d.getMonth() + 1); }
+      } else { out.push({ date, desc, type, amt }); }
+    });
+    return out;
+  }
+
+  function parseTxMonth(startDate, months) {
+    const out = [];
+    document.querySelectorAll('#txMonthList .tx-grid').forEach(r => {
+      const inp = r.querySelectorAll('input, select');
+      const mNum = parseInt(inp[0].value) || 1;
+      const desc = inp[1].value || 'Transaction';
+      const type = inp[2].value;
+      const amt = parseFloat(inp[3].value) || 0;
+      const recurring = inp[4].value === 'yes';
+      const date = new Date(startDate);
+      date.setMonth(date.getMonth() + mNum - 1);
+      if (recurring) {
+        let d = new Date(date);
+        for (let m = mNum; m <= months; m++) { out.push({ date: new Date(d), desc, type, amt }); d.setMonth(d.getMonth() + 1); }
+      } else { out.push({ date, desc, type, amt }); }
+    });
+    return out;
+  }
+
+  function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+  function fmtD(n) { return '₹' + n.toFixed(2); }
+  function calcEMI(P, r, n) { const mr = r / 12 / 100; return P * mr * Math.pow(1 + mr, n) / (Math.pow(1 + mr, n) - 1); }
+
+  function calculate() {
+    const loanAmt = parseFloat(document.getElementById('loanAmt').value) || 5000000;
+    const rate = parseFloat(document.getElementById('rate').value) || 8.5;
+    const tenure = parseInt(document.getElementById('tenure').value) || 20;
+    const months = parseInt(document.getElementById('simPeriod').value) || 6;
+    const startDate = new Date(document.getElementById('startDate').value);
+    const emiType = document.getElementById('emiType').value;
+    const dailyRate = rate / 100 / 365;
+    const emi = emiType === 'fixed' ? calcEMI(loanAmt, rate, tenure * 12) : (parseFloat(document.getElementById('customEmi').value) || 45000);
+
+    const allTx = [...parseTxDay(startDate, months), ...parseTxMonth(startDate, months)];
+    const txMap = {};
+    allTx.forEach(tx => {
+      const key = tx.date.toISOString().split('T')[0];
+      if (!txMap[key]) txMap[key] = [];
+      txMap[key].push(tx);
+    });
+
+    let loanBal = loanAmt, workingBal = 0;
+    let totalInterestOD = 0, totalInterestStd = 0, totalDep = 0, totalWith = 0;
+    const ledger = [], chartLabels = [], chartLoanBal = [], chartDailyInt = [], chartSavings = [];
+
+    const endDate = new Date(startDate);
+    endDate.setMonth(endDate.getMonth() + months);
+    let d = new Date(startDate), dayNum = 0;
+    const totalDays = Math.round((endDate - startDate) / 86400000);
+    const chartStep = Math.max(1, Math.floor(totalDays / 90));
+
+    while (d < endDate) {
+      const key = d.toISOString().split('T')[0];
+      const txToday = txMap[key] || [];
+      const isMonthEnd = new Date(d.getTime() + 86400000).getDate() === 1;
+      const isEmiDay = d.getDate() === startDate.getDate() && d > startDate;
+      let txDesc = '', txBadge = '', txAmt = 0;
+
+      if (isEmiDay) { workingBal -= emi; loanBal -= emi; }
+
+      txToday.forEach(tx => {
+        if (tx.type === 'deposit') { workingBal += tx.amt; totalDep += tx.amt; }
+        else { workingBal -= tx.amt; totalWith += tx.amt; }
+        txDesc += (txDesc ? '; ' : '') + tx.desc;
+        txBadge = tx.type;
+        txAmt += tx.amt;
+      });
+
+      if (isEmiDay && !txToday.length) { txDesc = 'EMI payment'; txBadge = 'emi'; txAmt = emi; }
+      else if (isEmiDay) { txDesc = 'EMI + ' + txDesc; txAmt += emi; }
+
+      const effectivePrincipal = Math.max(0, loanBal - Math.max(0, workingBal));
+      const dailyIntOD = effectivePrincipal * dailyRate;
+      const dailyIntStd = loanBal * dailyRate;
+      totalInterestOD += dailyIntOD;
+      totalInterestStd += dailyIntStd;
+
+      ledger.push({
+        date: key, desc: txDesc, type: txBadge, amt: txAmt,
+        workingBal, dailyIntOD, loanBal, effectivePrincipal,
+        isMonthEnd, hasTx: txToday.length > 0 || isEmiDay
+      });
+
+      if (dayNum % chartStep === 0 || isMonthEnd) {
+        chartLabels.push(d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }));
+        chartLoanBal.push(Math.round(loanBal));
+        chartDailyInt.push(parseFloat(dailyIntOD.toFixed(2)));
+        chartSavings.push(parseFloat((totalInterestStd - totalInterestOD).toFixed(2)));
+      }
+
+      d.setDate(d.getDate() + 1);
+      dayNum++;
+    }
+
+    ledgerData = ledger;
+    const avgWorkingBal = ledger.reduce((s, r) => s + r.workingBal, 0) / ledger.length;
+    const saved = totalInterestStd - totalInterestOD;
+    const effRate = (totalInterestOD / (loanAmt * ledger.length / 365)) * 100;
+
+    document.getElementById('rEmi').textContent = fmt(emi);
+    document.getElementById('rSaved').textContent = fmt(saved);
+    document.getElementById('rEffRate').textContent = effRate.toFixed(3) + '%';
+    document.getElementById('rAvgBal').textContent = fmt(avgWorkingBal);
+    document.getElementById('iLoan').textContent = fmt(loanAmt);
+    document.getElementById('iStdInt').textContent = fmt(totalInterestStd);
+    document.getElementById('iOdInt').textContent = fmt(totalInterestOD);
+    document.getElementById('iDays').textContent = ledger.length.toLocaleString();
+    document.getElementById('iTotDep').textContent = fmt(totalDep);
+    document.getElementById('iTotWith').textContent = fmt(totalWith);
+    document.getElementById('iNetBal').textContent = fmt(totalDep - totalWith);
+    document.getElementById('iMonths').textContent = months;
+
+    window._chartData = { labels: chartLabels, loanBal: chartLoanBal, dailyInt: chartDailyInt, savings: chartSavings };
+    renderChart('balance');
+    document.querySelectorAll('.period-toggle .pt-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+    filterLedger('all');
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderChart(type) {
+    const cd = window._chartData;
+    if (!cd) return;
+    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+    const ctx = document.getElementById('mainChart');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+    const tickColor = isDark ? '#6e6d67' : '#888780';
+    let datasets, legend;
+
+    if (type === 'balance') {
+      datasets = [{ label: 'Loan balance', data: cd.loanBal, borderColor: '#185fa5', backgroundColor: isDark ? 'rgba(24,95,165,0.15)' : 'rgba(24,95,165,0.08)', tension: 0.3, fill: true, pointRadius: 0, borderWidth: 2 }];
+      legend = [{ color: '#185fa5', label: 'Loan balance (₹)' }];
+    } else if (type === 'interest') {
+      datasets = [{ label: 'Daily interest', data: cd.dailyInt, borderColor: '#ba7517', backgroundColor: isDark ? 'rgba(186,117,23,0.15)' : 'rgba(186,117,23,0.08)', tension: 0.3, fill: true, pointRadius: 0, borderWidth: 2 }];
+      legend = [{ color: '#ba7517', label: 'Daily interest charged (₹)' }];
+    } else {
+      datasets = [{ label: 'Cumulative savings', data: cd.savings, borderColor: '#1d9e75', backgroundColor: isDark ? 'rgba(29,158,117,0.15)' : 'rgba(29,158,117,0.08)', tension: 0.3, fill: true, pointRadius: 0, borderWidth: 2 }];
+      legend = [{ color: '#1d9e75', label: 'Cumulative interest saved vs standard loan (₹)' }];
+    }
+
+    document.getElementById('chartLegend').innerHTML = legend.map(l =>
+      `<span><span class="legend-dot" style="background:${l.color}"></span>${l.label}</span>`).join('');
+
+    chartInstance = new Chart(ctx, {
+      type: 'line', data: { labels: cd.labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ₹' + ctx.parsed.y.toLocaleString('en-IN') } } },
+        scales: {
+          x: { ticks: { font: { size: 11 }, maxTicksLimit: 10, color: tickColor }, grid: { display: false } },
+          y: { ticks: { font: { size: 11 }, color: tickColor, callback: v => v >= 100000 ? '₹' + (v / 100000).toFixed(1) + 'L' : '₹' + v.toLocaleString('en-IN') }, grid: { color: gridColor } }
+        }
+      }
+    });
+  }
+
+  function switchChart(type, btn) {
+    document.querySelectorAll('.period-toggle .pt-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderChart(type);
+  }
+
+  function filterLedger(filter, btn) {
+    if (btn) {
+      document.querySelectorAll('#ledgerFilter .pt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    let rows = ledgerData;
+    if (filter === 'tx') rows = rows.filter(r => r.hasTx);
+    else if (filter === 'month') rows = rows.filter(r => r.isMonthEnd);
+    const tooMany = filter === 'all' && rows.length > 300;
+    const show = tooMany ? rows.filter((_, i) => i % Math.ceil(rows.length / 300) === 0) : rows;
+    document.getElementById('ledgerNote').style.display = tooMany ? 'flex' : 'none';
+    document.getElementById('ledgerBody').innerHTML = show.map(r => `<tr>
+      <td>${r.date}</td>
+      <td style="color:var(--text2)">${r.desc || '—'}</td>
+      <td>${r.type ? `<span class="badge ${r.type}">${r.type}</span>` : '—'}</td>
+      <td style="color:${r.type === 'deposit' ? 'var(--green)' : r.amt ? 'var(--red)' : 'var(--text3)'}">${r.amt ? fmt(r.amt) : '—'}</td>
+      <td style="color:${r.workingBal >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(r.workingBal)}</td>
+      <td>${fmt(r.effectivePrincipal)}</td>
+      <td>${fmtD(r.dailyIntOD)}</td>
+      <td>${fmt(r.loanBal)}</td>
+    </tr>`).join('');
+  }
+
+  // Pre-load example transactions
+  window.addEventListener('DOMContentLoaded', () => {
+    addTx('day');
+    const dayRow = document.querySelector('#txDayList .tx-grid');
+    const di = dayRow.querySelectorAll('input, select');
+    di[0].value = '2024-02-01'; di[1].value = 'Salary credit';
+    di[2].value = 'deposit'; di[3].value = '80000'; di[4].value = 'yes';
+
+    addTx('month');
+    const mRow = document.querySelector('#txMonthList .tx-grid');
+    const mi = mRow.querySelectorAll('input, select');
+    mi[0].value = '3'; mi[1].value = 'Annual bonus';
+    mi[2].value = 'deposit'; mi[3].value = '500000'; mi[4].value = 'no';
+  });
+</script>
+</body>
+</html>
