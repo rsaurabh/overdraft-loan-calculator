@@ -13,7 +13,7 @@
 /* ─────────────────────────────────────────────
    TOKENS  –  DARK  (palette-derived)
    Palette source:
-     #F2EAE0  warm ivory -Given By ravi
+     #F2EAE0  warm ivory
      #B4D3D9  muted teal
      #BDA6CE  soft lavender
      #9B8EC7  deep purple-violet
@@ -385,15 +385,161 @@ header{
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+/* ─────────────────────────────────────────────
+   RESPONSIVE  –  tablet ≤ 700px
+───────────────────────────────────────────── */
 @media(max-width:700px){
   .g2{grid-template-columns:1fr;}
   .g3{grid-template-columns:1fr 1fr;}
   .g4,.g5{grid-template-columns:1fr 1fr;}
+  .txg,.txh{grid-template-columns:85px 1fr 95px 92px 78px 26px;gap:4px;}
+  .atxg,.atxh{grid-template-columns:85px 1fr 92px 100px 26px;gap:4px;}
 }
 
 /* ─────────────────────────────────────────────
-   FORM
+   RESPONSIVE  –  mobile ≤ 430px  (iPhone 15)
 ───────────────────────────────────────────── */
+@media(max-width:430px){
+
+  /* Header — compress to icon + title + theme btn only */
+  header{padding:0 12px;gap:8px;height:52px;}
+  .h-sep,.h-pill{display:none;}
+  .h-wordmark .h-sub{display:none;}
+  .h-title{font-size:13px;}
+  .h-logo{width:30px;height:30px;font-size:14px;border-radius:8px;}
+  .hact{gap:6px;}
+  .hbtn{padding:5px 9px;font-size:11px;gap:4px;}
+  .hbtn i{font-size:13px;}
+  /* Hide Export button labels on mobile, keep icons */
+  .hbtn .btn-label{display:none;}
+
+  /* Nav — smaller tabs */
+  .nav{top:52px;padding:0 8px;}
+  .ntab{padding:0 10px;height:40px;font-size:11px;gap:4px;}
+  .ntab i{font-size:13px;}
+
+  /* Container */
+  .container{padding:1rem 0.75rem 4rem;}
+
+  /* Hero section */
+  .hero{padding:1.5rem 1rem 1.25rem;}
+  .hero-title{font-size:22px;}
+  .hero-sub{font-size:13px;margin-bottom:14px;}
+  .hero-tag{font-size:9px;}
+  .hero-stats{gap:16px;}
+  .hstat-val{font-size:18px;}
+  .hstat-lbl{font-size:10px;}
+
+  /* Cards */
+  .card-hd{padding:12px 14px;gap:6px;}
+  .card-bd{padding:14px;}
+  .card-bd.sm{padding:10px 14px;}
+  .card-title{font-size:12px;}
+  .card-ico{width:24px;height:24px;font-size:11px;}
+
+  /* Grids — all single column on mobile */
+  .g2,.g3,.g4,.g5{grid-template-columns:1fr;gap:10px;}
+
+  /* KPI cards — 2 per row */
+  .g5{grid-template-columns:1fr 1fr;}
+  .g4{grid-template-columns:1fr 1fr;}
+  .kpi{padding:12px;}
+  .kpi-val{font-size:16px;}
+  .kpi-lbl{font-size:9px;}
+
+  /* Infobox */
+  .infobox{padding:10px 12px;font-size:12px;}
+
+  /* Inner tabs */
+  .tabs{gap:2px;}
+  .tab{font-size:11px;padding:6px 6px;gap:4px;}
+
+  /* Transaction input rows — stack vertically on mobile */
+  .txg,.txh{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    padding:10px;
+    background:var(--bg-3);
+    border:1px solid var(--bd);
+    border-radius:var(--rs);
+    margin-bottom:8px;
+  }
+  .txh{display:none;} /* hide headers — labels implied */
+  .txg input,.txg select{font-size:12px;}
+  /* Delete button spans full width as last item */
+  .txg .bdel{grid-column:2;justify-self:end;}
+
+  /* Actual tx rows */
+  .atxg,.atxh{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    padding:10px;
+    background:var(--bg-3);
+    border:1px solid var(--bd);
+    border-radius:var(--rs);
+    margin-bottom:8px;
+  }
+  .atxh{display:none;}
+  .atxg input,.atxg select{font-size:12px;}
+  .atxg .bdel{grid-column:2;justify-self:end;}
+
+  /* CTA button */
+  .bcalc{font-size:13px;padding:12px;}
+
+  /* Pills */
+  .pills{gap:5px;}
+  .pill{font-size:10px;padding:4px 10px;}
+
+  /* Savings card */
+  .sv-inner{padding:18px;gap:20px;flex-direction:column;align-items:center;}
+  .sv-gauge{width:100%;align-items:center;}
+  .sv-stats{min-width:0;width:100%;}
+  .sv-amount{font-size:28px;}
+  .sv-box{flex-direction:column;gap:10px;}
+  .sv-sep{display:none;}
+
+  /* Summary data rows */
+  .dr{font-size:12px;flex-wrap:wrap;gap:2px;}
+  .dr .v{font-size:12px;}
+  .dr-sect{font-size:9px;}
+
+  /* Scenario cards */
+  .sc-card{flex-wrap:wrap;gap:10px;padding:12px;}
+  .sc-act{width:100%;justify-content:flex-end;}
+  .sc-ico{width:30px;height:30px;font-size:14px;}
+  .sc-name{font-size:13px;}
+  .sc-meta{font-size:10px;}
+
+  /* Action buttons */
+  .abtn{font-size:11px;padding:5px 9px;}
+
+  /* Header CTA actions — stack Export buttons */
+  .card-hd .hbtn,.card-hd .abtn{font-size:11px;padding:5px 8px;}
+
+  /* Charts */
+  .chwrap{height:200px;}
+  .legend{gap:8px;font-size:11px;}
+
+  /* Modals */
+  .modal{padding:18px;}
+  .modal h3{font-size:15px;}
+  .mact{flex-wrap:wrap;gap:6px;}
+
+  /* Calculate CTA on actuals page */
+  #actualsCalcCta > div{padding:16px;flex-direction:column;align-items:flex-start;gap:14px;}
+  #actualsCalcCta button{width:100%;justify-content:center;}
+
+  /* Sync banner */
+  #syncedFromActualsBanner{font-size:11px;padding:8px 14px;}
+
+  /* Footer */
+  footer{font-size:10px;padding:1.5rem 0.75rem;}
+
+  /* Snapshot chart */
+  #snapChartWrap .chwrap{height:180px;}
+}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{
   font-size:11px;font-weight:700;color:var(--t3);
@@ -483,10 +629,6 @@ input:focus,select:focus,textarea:focus{
 .atxg{display:grid;grid-template-columns:110px 1fr 130px 140px 32px;gap:7px;align-items:center;margin-bottom:8px;}
 .atxh{display:grid;grid-template-columns:110px 1fr 130px 140px 32px;gap:7px;margin-bottom:6px;}
 .atxh span{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;}
-@media(max-width:700px){
-  .txg,.txh{grid-template-columns:85px 1fr 95px 92px 78px 26px;gap:4px;}
-  .atxg,.atxh{grid-template-columns:85px 1fr 92px 100px 26px;gap:4px;}
-}
 
 .btn-add{
   display:inline-flex;align-items:center;gap:6px;
@@ -704,6 +846,21 @@ table.tbl tr.int-row td{background:rgba(244,63,94,0.05);}
 .empty i{font-size:36px;margin-bottom:12px;display:block;opacity:.3;}
 .empty p{font-size:13px;}
 
+/* Export modal checkboxes */
+.exp-check{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 10px;
+  background:var(--bg-3);
+  border:1px solid var(--bd);
+  border-radius:var(--rs);
+  font-size:12px;font-weight:500;color:var(--t2);
+  cursor:pointer;
+  transition:border-color .15s, background .15s;
+}
+.exp-check:hover{border-color:var(--acc-bd);color:var(--t1);}
+.exp-check input{width:auto;accent-color:var(--acc);cursor:pointer;}
+.exp-check i{font-size:13px;color:var(--acc-2);}
+
 /* ─────────────────────────────────────────────
    TOAST
 ───────────────────────────────────────────── */
@@ -783,9 +940,8 @@ footer{
   <span class="h-pill"><i class="ti ti-shield-check"></i> True Overdraft Model</span>
   <div class="hact">
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme"><i class="ti ti-moon" id="themeIcon"></i></button>
-    <button class="hbtn" onclick="exportPDF()"><i class="ti ti-file-type-pdf"></i> Export PDF</button>
-    <button class="hbtn" onclick="exportXLS()" title="Export full simulation data as Excel workbook"><i class="ti ti-file-type-xls"></i> Export XLS</button>
-    <button class="hbtn hbtn-cta" onclick="saveScenario()"><i class="ti ti-device-floppy"></i> Save Scenario</button>
+    <button class="hbtn" onclick="openExportModal()" title="Export simulation data — choose format and columns"><i class="ti ti-table-export"></i><span class="btn-label"> Export</span></button>
+    <button class="hbtn hbtn-cta" onclick="saveScenario()"><i class="ti ti-device-floppy"></i><span class="btn-label"> Save Scenario</span></button>
   </div>
 </header>
 
@@ -1276,6 +1432,86 @@ footer{
     <div class="mact">
       <button class="abtn" onclick="closeModal()">Cancel</button>
       <button class="abtn primary" id="csvConfirmBtn" onclick="confirmImportCSV()"><i class="ti ti-check"></i> Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Export Options Modal ── -->
+<div class="mbg" id="exportModal">
+  <div class="modal" style="max-width:520px;max-height:90vh;overflow-y:auto;">
+    <h3><i class="ti ti-table-export" style="color:var(--acc-2);margin-right:8px;"></i>Export Options</h3>
+
+    <!-- Format -->
+    <div style="margin-bottom:18px;">
+      <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">Format</div>
+      <div style="display:flex;gap:10px;">
+        <label style="flex:1;display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg-3);border:1px solid var(--bd2);border-radius:var(--rs);cursor:pointer;font-size:13px;font-weight:500;" id="fmt-pdf-lbl">
+          <input type="radio" name="exportFmt" value="pdf" id="fmt-pdf" checked style="width:auto;accent-color:var(--acc);">
+          <i class="ti ti-file-type-pdf" style="color:var(--ro-2);font-size:16px;"></i> PDF
+        </label>
+        <label style="flex:1;display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg-3);border:1px solid var(--bd2);border-radius:var(--rs);cursor:pointer;font-size:13px;font-weight:500;" id="fmt-xls-lbl">
+          <input type="radio" name="exportFmt" value="xls" id="fmt-xls" style="width:auto;accent-color:var(--acc);">
+          <i class="ti ti-file-spreadsheet" style="color:var(--em-2);font-size:16px;"></i> Excel (.xls)
+        </label>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--bd);margin-bottom:16px;"></div>
+
+    <!-- Sections -->
+    <div style="margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;">Sections to Include</div>
+        <button onclick="toggleAllSections(true)" style="background:transparent;border:none;font-size:11px;color:var(--acc-2);cursor:pointer;font-family:var(--font);font-weight:600;">Select All</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+        <label class="exp-check"><input type="checkbox" id="sec-summary" checked> <i class="ti ti-report-analytics"></i> Loan Summary</label>
+        <label class="exp-check"><input type="checkbox" id="sec-ledger"  checked> <i class="ti ti-table"></i> Daily Ledger</label>
+        <label class="exp-check"><input type="checkbox" id="sec-snaps"   checked> <i class="ti ti-camera"></i> Snapshots</label>
+        <label class="exp-check"><input type="checkbox" id="sec-actuals" checked> <i class="ti ti-receipt"></i> Actual Transactions</label>
+        <label class="exp-check"><input type="checkbox" id="sec-scens"   checked> <i class="ti ti-layers-intersect"></i> Saved Scenarios</label>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--bd);margin-bottom:16px;"></div>
+
+    <!-- Ledger columns -->
+    <div id="ledgerColsSection">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;">Ledger Columns</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="toggleAllCols(true)"  style="background:transparent;border:none;font-size:11px;color:var(--acc-2);cursor:pointer;font-family:var(--font);font-weight:600;">All</button>
+          <button onclick="toggleAllCols(false)" style="background:transparent;border:none;font-size:11px;color:var(--t3);cursor:pointer;font-family:var(--font);font-weight:600;">None</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+        <label class="exp-check"><input type="checkbox" id="col-date"    checked> Date</label>
+        <label class="exp-check"><input type="checkbox" id="col-desc"    checked> Description</label>
+        <label class="exp-check"><input type="checkbox" id="col-type"    checked> Type</label>
+        <label class="exp-check"><input type="checkbox" id="col-tx"      checked> Transaction (₹)</label>
+        <label class="exp-check"><input type="checkbox" id="col-avail"   checked> Available Balance (₹)</label>
+        <label class="exp-check"><input type="checkbox" id="col-clear"   checked> Clear Balance (₹)</label>
+        <label class="exp-check"><input type="checkbox" id="col-dint"    checked> Daily Interest (₹)</label>
+        <label class="exp-check"><input type="checkbox" id="col-pint"    checked> Pending Interest (₹)</label>
+        <label class="exp-check"><input type="checkbox" id="col-cint"    checked> Cumulative Interest (₹)</label>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--bd);margin:16px 0 4px;"></div>
+
+    <!-- Ledger row filter -->
+    <div style="margin-bottom:4px;">
+      <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">Ledger Rows</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;">
+        <label class="exp-check"><input type="radio" name="expRows" value="tx"    id="rows-tx"> Transaction days only</label>
+        <label class="exp-check"><input type="radio" name="expRows" value="month" id="rows-month"> Month-end only</label>
+        <label class="exp-check"><input type="radio" name="expRows" value="all"   id="rows-all" checked> All days</label>
+      </div>
+    </div>
+
+    <div class="mact" style="margin-top:20px;">
+      <button class="abtn" onclick="closeModal()">Cancel</button>
+      <button class="abtn primary" onclick="runExport()"><i class="ti ti-download"></i> Export</button>
     </div>
   </div>
 </div>
@@ -2195,10 +2431,463 @@ function renderSnapshots(){
      4. Actual Transactions
      5. Saved Scenarios
 ═══════════════════════════════════════════════════════ */
-function exportXLS(){
-  if(!window._lastCalc && !ledgerData.length && !ls().snapshots?.length && !gf('actuals',[]).length){
-    toast('Run a simulation first to export data',1); return;
+/* ═══════════════════════════════════════════════
+   EXPORT XLS  —  SpreadsheetML
+═══════════════════════════════════════════════ */
+function exportXLS(cfg){
+  if(!cfg) cfg=getExportConfig();
+  const calc=window._lastCalc;
+  const snaps=ls().snapshots||[];
+  const acts=gf('actuals',[]);
+  const scens=ls().scenarios||[];
+  const now=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const xe=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const xc=(v,t,st)=>`<Cell${st?` ss:StyleID="${st}"`:''}><Data ss:Type="${t||'String'}">${xe(String(v??''))}</Data></Cell>`;
+  const xn=(v,st)=>`<Cell${st?` ss:StyleID="${st}"`:''}><Data ss:Type="Number">${isNaN(parseFloat(v))?0:parseFloat(v)}</Data></Cell>`;
+  const xr=cells=>`<Row>${cells}</Row>`;
+  const xh=cols=>xr(cols.map(c=>`<Cell ss:StyleID="H"><Data ss:Type="String">${xe(c)}</Data></Cell>`).join(''));
+  const xblank='<Row/>';
+
+  const styles=`<Styles>
+    <Style ss:ID="H"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#9B8EC7" ss:Pattern="Solid"/></Style>
+    <Style ss:ID="B"><Font ss:Bold="1"/></Style>
+    <Style ss:ID="S"><Font ss:Bold="1" ss:Color="#7F72B0"/><Interior ss:Color="#F5F0F8" ss:Pattern="Solid"/></Style>
+    <Style ss:ID="pos"><Font ss:Color="#4A8892" ss:Bold="1"/></Style>
+    <Style ss:ID="neg"><Font ss:Color="#A85060" ss:Bold="1"/></Style>
+    <Style ss:ID="warn"><Font ss:Color="#8C6B3E" ss:Bold="1"/></Style>
+    <Style ss:ID="acc"><Font ss:Color="#7F72B0" ss:Bold="1"/></Style>
+    <Style ss:ID="eod"><Interior ss:Color="#F5F0F8" ss:Pattern="Solid"/><Font ss:Italic="1" ss:Color="#5A4E6A"/></Style>
+    <Style ss:ID="irow"><Interior ss:Color="#FDF0EF" ss:Pattern="Solid"/></Style>
+  </Styles>`;
+
+  // ── Sheet 1: Summary ──
+  let s1=xr(`<Cell ss:StyleID="S" ss:MergeAcross="3"><Data ss:Type="String">Overdraft Loan Simulation — ${now}</Data></Cell>`);
+  if(cfg.summary && calc){
+    s1+=xblank;
+    s1+=xr(`<Cell ss:StyleID="S" ss:MergeAcross="3"><Data ss:Type="String">LOAN PARAMETERS</Data></Cell>`);
+    [['Loan Limit (₹)',Math.round(calc.loanLimit),'neg'],
+     ['Interest Rate (%)',calc.rate,''],
+     ['Tenure (Years)',calc.tenure,''],
+     ['Monthly EMI (₹)',calc.emi>0?Math.round(calc.emi):0,''],
+     ['Start Date',calc.startDate||'',''],
+     ['First Drawdown',calc.firstDrawDate||'—',''],
+     ['Months Simulated',calc.months,''],
+    ].forEach(([k,v,st])=>s1+=xr(xc(k,'String','B')+xn(isNaN(v)?0:v,st||'')+xc('','String','')+xc('','String','')));
+    s1+=xblank;
+    s1+=xr(`<Cell ss:StyleID="S" ss:MergeAcross="3"><Data ss:Type="String">INTEREST &amp; SAVINGS</Data></Cell>`);
+    [['Total Drawn (₹)',Math.round(calc.totalWithdrawn),'neg'],
+     ['Total Deposited (₹)',Math.round(calc.totalDeposited),'pos'],
+     ['Interest Without Deposits (₹)',Math.round(calc.shadowCumInt),'neg'],
+     ['Interest With Deposits (₹)',Math.round(calc.cumInterest),'warn'],
+     ['Deposit Savings (₹)',Math.round(calc.depositSavings),'pos'],
+     ['Interest Auto-Debited (₹)',Math.round(calc.totalIntDebited),'neg'],
+     ['Zero-Interest Days',calc.zeroDays,'pos'],
+     ['Peak Drawn Balance (₹)',Math.round(calc.peakDrawn),'neg'],
+     ['Avg Drawn Balance (₹)',Math.round(calc.avgDrawn),''],
+     ['Effective Rate p.a. (%)',parseFloat(calc.effRate.toFixed(3)),'acc'],
+    ].forEach(([k,v,st])=>s1+=xr(xc(k,'String','B')+xn(v,st||'')+xc('','String','')+xc('','String','')));
+  } else {
+    s1+=xr(xc('Summary not included or no simulation run yet.'));
   }
+  const ws1=`<Worksheet ss:Name="Summary"><Table>${s1}</Table></Worksheet>`;
+
+  // ── Sheet 2: Daily Ledger ──
+  // Column definitions — id matches cfg.cols entries
+  const allLedgerCols=[
+    {id:'date',  hdr:'Date',                 eod:r=>xc(r.date),                       tx:r=>xc(r.date)},
+    {id:'desc',  hdr:'Description',           eod:r=>xc(r.hasTx?'End of day':'—','String','eod'), tx:r=>xc(r.desc||'—')},
+    {id:'type',  hdr:'Type',                  eod:r=>xc('—'),                          tx:r=>xc(r.type||'—')},
+    {id:'tx',    hdr:'Transaction (₹)',        eod:r=>xc('—'),                          tx:r=>r.txAmt?xn(parseFloat(r.txAmt.toFixed(2)),r.txAmt>0?'neg':'pos'):xc('—')},
+    {id:'avail', hdr:'Available Balance (₹)',  eod:r=>xn(Math.round(r.available),''),  tx:r=>xn(Math.round(r.available),'')},
+    {id:'clear', hdr:'Clear Balance (₹)',      eod:r=>xn(Math.round(r.drawnBal),r.drawnBal>0?'neg':'pos'), tx:r=>xn(Math.round(r.drawnBal),r.drawnBal>0?'neg':'pos')},
+    {id:'dint',  hdr:'Daily Interest (₹)',     eod:r=>xn(parseFloat(r.dailyInt.toFixed(2)),r.isZeroInt?'pos':''),  tx:r=>xc('—')},
+    {id:'pint',  hdr:'Pending Interest (₹)',   eod:r=>xn(parseFloat(r.pendingInt.toFixed(2)),''),  tx:r=>xc('—')},
+    {id:'cint',  hdr:'Cumulative Interest (₹)',eod:r=>xn(parseFloat(r.cumInterest.toFixed(2)),''), tx:r=>xc('—')},
+  ];
+  const selCols=allLedgerCols.filter(cd=>cfg.cols.includes(cd.id));
+  let s2='';
+  if(cfg.ledger && ledgerData.length && selCols.length){
+    s2+=xh(selCols.map(cd=>cd.hdr));
+    let xlsRows=ledgerData;
+    if(cfg.rowFilter==='tx')    xlsRows=ledgerData.filter(r=>r.hasTx);
+    else if(cfg.rowFilter==='month') xlsRows=ledgerData.filter(r=>r.eod&&r.isMonthEnd);
+    xlsRows.forEach(r=>{
+      const cells=selCols.map(cd=>r.eod?cd.eod(r):cd.tx(r)).join('');
+      const sty=r.eod?' ss:StyleID="eod"':r.monthlyIntDebit>0?' ss:StyleID="irow"':'';
+      s2+=`<Row${sty}>${cells}</Row>`;
+    });
+  } else {
+    s2+=xr(xc(cfg.ledger?'No simulation data. Run the calculator first.':'Ledger not included.'));
+  }
+  const ws2=`<Worksheet ss:Name="Daily Ledger"><Table>${s2}</Table><WorksheetOptions><FreezePanes/><FrozenRowCount>1</FrozenRowCount><ActivePane>2</ActivePane></WorksheetOptions></Worksheet>`;
+
+  // ── Sheet 3: Snapshots ──
+  let s3='';
+  if(cfg.snaps && snaps.length){
+    s3+=xh(['Date','Label','Source','Available Bal (₹)','Clear Bal (₹)','Interest Paid (₹)','Zero-Int Days','Eff. Rate (%)']);
+    snaps.forEach(sn=>s3+=xr(
+      xc(new Date(sn.savedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}))+
+      xc(sn.label)+xc(sn.source)+
+      xn((sn.loanLimit||0)-(sn.drawnBal||0),'pos')+xn(sn.drawnBal,'neg')+
+      xn(sn.interestPaid,'warn')+xn(sn.zeroDays,'pos')+
+      xn(sn.effRate!=null?parseFloat(sn.effRate.toFixed(3)):0,'acc')
+    ));
+  } else { s3+=xr(xc(cfg.snaps?'No snapshots yet.':'Not included.')); }
+  const ws3=cfg.snaps?`<Worksheet ss:Name="Snapshots"><Table>${s3}</Table></Worksheet>`:'';
+
+  // ── Sheet 4: Actual Transactions ──
+  let s4='';
+  if(cfg.actuals && acts.length){
+    let wit=0,dep=0;
+    acts.forEach(a=>{const v=parseFloat(a.amt)||0;if(a.type==='withdraw')wit+=v;else dep+=v;});
+    s4+=xr(`<Cell ss:StyleID="S" ss:MergeAcross="3"><Data ss:Type="String">Total Withdrawn: ${fmt(wit)} · Total Deposited: ${fmt(dep)} · Net: ${fmt(wit-dep)}</Data></Cell>`);
+    s4+=xh(['Date','Description','Type','Amount (₹)']);
+    acts.forEach(a=>s4+=xr(xc(a.date)+xc(a.desc)+xc(a.type)+xn(parseFloat(a.amt)||0,a.type==='withdraw'?'neg':'pos')));
+    s4+=xblank;
+    s4+=xr(xc('Total Withdrawn','String','B')+xc('','String','')+xc('','String','')+xn(wit,'neg'));
+    s4+=xr(xc('Total Deposited','String','B')+xc('','String','')+xc('','String','')+xn(dep,'pos'));
+    s4+=xr(xc('Net Drawn','String','B')+xc('','String','')+xc('','String','')+xn(wit-dep,(wit-dep)>0?'neg':'pos'));
+  } else { s4+=xr(xc(cfg.actuals?'No actual transactions.':'Not included.')); }
+  const ws4=cfg.actuals?`<Worksheet ss:Name="Actual Transactions"><Table>${s4}</Table></Worksheet>`:'';
+
+  // ── Sheet 5: Scenarios ──
+  let s5='';
+  if(cfg.scens && scens.length){
+    s5+=xh(['Name','Notes','Loan Limit (₹)','Rate (%)','Tenure (Yrs)','Saved On','Interest (₹)','Zero Days','Eff. Rate (%)']);
+    scens.forEach(sc=>s5+=xr(
+      xc(sc.name)+xc(sc.notes||'')+
+      xn(parseFloat(sc.setup?.loanAmt)||0,'')+xn(parseFloat(sc.setup?.rate)||0,'')+xn(parseInt(sc.setup?.tenure)||0,'')+
+      xc(new Date(sc.savedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}))+
+      (sc.calc?xn(Math.round(sc.calc.cumInterest),'warn'):xc('—'))+
+      (sc.calc?xn(sc.calc.zeroDays,'pos'):xc('—'))+
+      (sc.calc?xn(parseFloat(sc.calc.effRate.toFixed(3)),'acc'):xc('—'))
+    ));
+  } else { s5+=xr(xc(cfg.scens?'No scenarios.':'Not included.')); }
+  const ws5=cfg.scens?`<Worksheet ss:Name="Saved Scenarios"><Table>${s5}</Table></Worksheet>`:'';
+
+  // ── Assemble ──
+  const wb=`<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:x="urn:schemas-microsoft-com:office:excel">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Title>Overdraft Loan Simulation</Title><Author>OD Loan Calculator</Author>
+    <Created>${new Date().toISOString()}</Created>
+  </DocumentProperties>
+  ${styles}${ws1}${ws2}${ws3}${ws4}${ws5}
+</Workbook>`;
+
+  const blob=new Blob([wb],{type:'application/vnd.ms-excel;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='overdraft-simulation-'+new Date().toISOString().split('T')[0]+'.xls';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  const n=[true,cfg.ledger,cfg.snaps,cfg.actuals,cfg.scens].filter(Boolean).length;
+  toast(`Excel exported — ${n} sheet${n!==1?'s':''}`);
+}
+
+/* ═══════════════════════════════════════════════
+   EXPORT PDF
+═══════════════════════════════════════════════ */
+function exportPDF(cfg){
+  if(!cfg) cfg=getExportConfig();
+
+  /* ── 0. Data sources — ALL from JS data objects, NEVER from DOM ── */
+  const calc   = window._lastCalc;
+  const snaps  = ls().snapshots  || [];
+  const acts   = gf('actuals',  []);
+  const scens  = ls().scenarios  || [];
+  const now    = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+  /* ── 1. Column registry — single source of truth ── */
+  const COL_REGISTRY = [
+    { id:'date',  label:'Date'                 },
+    { id:'desc',  label:'Description'          },
+    { id:'type',  label:'Type'                 },
+    { id:'tx',    label:'Transaction (₹)'      },
+    { id:'avail', label:'Available Bal (₹)'    },
+    { id:'clear', label:'Clear Bal (₹)'        },
+    { id:'dint',  label:'Daily Interest (₹)'   },
+    { id:'pint',  label:'Pending Interest (₹)' },
+    { id:'cint',  label:'Cumulative Int (₹)'   },
+  ];
+
+  /* Selected columns — filter by cfg.cols, preserve registry order */
+  const SEL = COL_REGISTRY.filter(c => cfg.cols.includes(c.id));
+
+  /* ── 2. Cell renderer — pure function, returns a <td> string for every col×row ── */
+  function renderCell(colId, row){
+    const isEod = row.eod === true;
+    const z     = row.isZeroInt;
+    const iRow  = row.monthlyIntDebit > 0;
+    const amt   = row.txAmt || 0;
+    const sign  = amt > 0 ? '−' : amt < 0 ? '+' : '';
+    const tCol  = amt > 0 ? '#A85060' : amt < 0 ? '#4A8892' : '#888';
+    const badge = row.type==='withdraw' ? '<span style="background:#FDF0EF;color:#A85060;padding:1pt 5pt;border-radius:9pt;font-size:6.5pt;font-weight:700;">withdraw</span>'
+                : row.type==='deposit'  ? '<span style="background:#E6F7F1;color:#4A8892;padding:1pt 5pt;border-radius:9pt;font-size:6.5pt;font-weight:700;">deposit</span>'
+                : row.type==='interest' ? '<span style="background:#FEF3E7;color:#8C6B3E;padding:1pt 5pt;border-radius:9pt;font-size:6.5pt;font-weight:700;">interest</span>'
+                : '—';
+
+    /* Every branch MUST return a string. No implicit undefined. */
+    if(isEod){
+      switch(colId){
+        case 'date':  return `<td style="font-weight:600;color:#2A2035;">${row.date}</td>`;
+        case 'desc':  return `<td class="wrap" style="color:#5A4E6A;">${row.hasTx?'End of day':'—'}</td>`;
+        case 'type':  return `<td style="color:#BBB;">—</td>`;
+        case 'tx':    return `<td style="color:#BBB;">—</td>`;
+        case 'avail': return `<td class="mono">${fmt(row.available)}</td>`;
+        case 'clear': return `<td class="mono" style="font-weight:700;color:${row.drawnBal>0?'#A85060':'#4A8892'};">${fmt(row.drawnBal)}</td>`;
+        case 'dint':  return `<td class="mono" style="font-weight:${z?700:400};color:${z?'#4A8892':'#8C6B3E'};">${z?'₹0 NIL':fmtD(row.dailyInt)}</td>`;
+        case 'pint':  return `<td class="mono" style="color:${row.pendingInt>0?'#8C6B3E':'#AAA'};">${row.pendingInt>0?fmtD(row.pendingInt):'—'}</td>`;
+        case 'cint':  return `<td class="mono" style="color:#5A4E6A;">${fmtD(row.cumInterest)}</td>`;
+        default:      return `<td>—</td>`;
+      }
+    } else {
+      switch(colId){
+        case 'date':  return `<td style="color:#888;">${row.date}</td>`;
+        case 'desc':  return `<td class="wrap" style="font-weight:${iRow?700:400};color:${iRow?'#A85060':'#222'};">${esc(row.desc||'—')}</td>`;
+        case 'type':  return `<td>${badge}</td>`;
+        case 'tx':    return `<td class="mono" style="font-weight:700;color:${tCol};">${amt?sign+fmt(Math.abs(amt)):'—'}</td>`;
+        case 'avail': return `<td class="mono" style="color:#555;">${fmt(row.available)}</td>`;
+        case 'clear': return `<td class="mono" style="font-weight:700;color:${row.drawnBal>0?'#A85060':'#4A8892'};">${fmt(row.drawnBal)}</td>`;
+        case 'dint':  return `<td style="color:#CCC;">—</td>`;
+        case 'pint':  return `<td style="color:#CCC;">—</td>`;
+        case 'cint':  return `<td style="color:#CCC;">—</td>`;
+        default:      return `<td>—</td>`;
+      }
+    }
+  }
+
+  /* ── 3. Table builder — for Snapshots / Actuals / Scenarios ── */
+  function buildTable(cols, dataRows, rowFn){
+    const thead=`<thead><tr style="background:#F5F0F8;">${
+      cols.map(c=>`<th style="font-size:6pt;font-weight:700;text-transform:uppercase;color:#6B7280;padding:3pt 5pt;border:.5pt solid #E0D8EC;white-space:nowrap;text-align:left;">${esc(c.label)}</th>`).join('')
+    }</tr></thead>`;
+    const tbody=`<tbody>${dataRows.map(rowFn).join('')}</tbody>`;
+    return `<table style="width:100%;border-collapse:collapse;font-size:7pt;margin-top:3pt;">${thead}${tbody}</table>`;
+  }
+
+  /* ── 4. Ledger table builder — fixed-layout with explicit colgroup ── */
+  function buildLedgerTable(selCols, dataRows){
+    /* Map col id → colgroup class */
+    const colClass={date:'c-date',desc:'c-desc',type:'c-type',tx:'c-tx',
+                    avail:'c-avail',clear:'c-clear',dint:'c-dint',pint:'c-pint',cint:'c-cint'};
+    /* Abbreviated headers to save space */
+    const colShort={
+      date:'Date', desc:'Description', type:'Type', tx:'Transaction\n(₹)',
+      avail:'Available\nBalance (₹)', clear:'Clear\nBalance (₹)',
+      dint:'Daily\nInterest (₹)', pint:'Pending\nInterest (₹)', cint:'Cumulative\nInterest (₹)',
+    };
+    const colgroup=`<colgroup>${selCols.map(c=>`<col class="${colClass[c.id]||''}">`).join('')}</colgroup>`;
+    const thead=`<thead><tr>${selCols.map(c=>`<th>${colShort[c.id]||c.label}</th>`).join('')}</tr></thead>`;
+    const tbody=`<tbody>${dataRows.map((r,i)=>buildLedgerRow(r,i)).join('')}</tbody>`;
+    return `<table class="ldg">${colgroup}${thead}${tbody}</table>`;
+  }
+
+  /* ── 5. Ledger row builder ── */
+  function buildLedgerRow(r, idx){
+    const cells = SEL.map(c => renderCell(c.id, r)).join('');
+    const cellCount = (cells.match(/<td/g)||[]).length;
+    if(cellCount !== SEL.length){
+      const extra = Array(Math.max(0,SEL.length-cellCount)).fill('<td style="background:#FEE;color:red;">!</td>').join('');
+      return `<tr>${cells}${extra}</tr>`;
+    }
+    const rowCls = r.eod ? ' class="eod"' : r.monthlyIntDebit>0 ? ' class="irow"' : '';
+    return `<tr${rowCls}>${cells}</tr>`;
+  }
+
+  /* ── 5. Print styles — minimal, layout-safe ── */
+  const pstyles=`<style>
+    @page{size:A4 landscape;margin:8mm 6mm;}
+    *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;font-size:7.5pt;color:#1A1A2E;}
+
+    /* Summary section */
+    .section{border:.5pt solid #DDD;border-radius:2pt;padding:6pt 8pt;margin-bottom:4mm;page-break-inside:avoid;}
+    .stitle{font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9B8EC7;
+            margin-bottom:4pt;padding-bottom:2pt;border-bottom:.5pt solid #E8E0F0;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:5pt;}
+    .kv{display:flex;justify-content:space-between;font-size:7.5pt;padding:2pt 0;border-bottom:.5pt solid #F0EEF5;}
+    .kv:last-child{border-bottom:none;}
+    .kk{color:#5A4E6A;}.kv2{font-weight:700;font-family:'Courier New',monospace;font-size:7pt;}
+    .pos{color:#4A8892;}.neg{color:#A85060;}.warn{color:#8C6B3E;}.acc{color:#7F72B0;}
+
+    /* ── LEDGER TABLE — fixed layout, all 9 columns always visible ── */
+    .ledger-wrap{width:100%;overflow:visible;}
+    table.ldg{
+      table-layout:fixed;
+      width:100%;
+      border-collapse:collapse;
+      font-size:6.5pt;
+    }
+    /* Column widths — total must fit A4 landscape printable width ~277mm */
+    /*  date(22) + desc(52) + type(18) + tx(24) + avail(26) + clear(26) + dint(22) + pint(22) + cint(24) = 236mm — fits with margin */
+    table.ldg col.c-date  {width:22mm;}
+    table.ldg col.c-desc  {width:54mm;}
+    table.ldg col.c-type  {width:17mm;}
+    table.ldg col.c-tx    {width:24mm;}
+    table.ldg col.c-avail {width:26mm;}
+    table.ldg col.c-clear {width:26mm;}
+    table.ldg col.c-dint  {width:22mm;}
+    table.ldg col.c-pint  {width:23mm;}
+    table.ldg col.c-cint  {width:25mm;}
+
+    table.ldg th{
+      font-size:5.8pt;font-weight:700;text-transform:uppercase;
+      letter-spacing:.04em;color:#6B7280;
+      background:#F5F0F8;
+      padding:3.5pt 3pt;
+      border:.5pt solid #DDD;
+      text-align:left;
+      white-space:normal;        /* allow wrap in header */
+      word-break:break-word;
+      line-height:1.2;
+    }
+    table.ldg td{
+      padding:2.5pt 3pt;
+      border:.5pt solid #EEE;
+      font-size:6.5pt;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      vertical-align:middle;
+    }
+    table.ldg td.wrap{white-space:normal;word-break:break-word;line-height:1.3;}
+    table.ldg tr:nth-child(even) td{background:#FAF8FC;}
+    table.ldg tr.eod td{background:#F5F0F8;font-style:italic;color:#5A4E6A;}
+    table.ldg tr.irow td{background:#FFF5F5;}
+    .mono{font-family:'Courier New',monospace;font-size:6.2pt;}
+
+    /* Inline type badges */
+    .bwit,.bdep,.bint{display:inline-block;font-size:5.5pt;font-weight:700;
+      padding:.8pt 3pt;border-radius:2pt;line-height:1.4;}
+    .bwit{background:#FDF0EF;color:#A85060;}
+    .bdep{background:#E6F7F1;color:#4A8892;}
+    .bint{background:#FEF3E7;color:#8C6B3E;}
+
+    table{page-break-inside:auto;}
+    tr{page-break-inside:avoid;page-break-after:auto;}
+    thead{display:table-header-group;}
+    .ledger-wrap{page-break-before:always;}
+  </style>`;
+
+  /* ── 6. Build HTML ── */
+  let html = pstyles + `<div>
+    <div style="font-size:16pt;font-weight:900;margin-bottom:2mm;color:#2A2035;">Overdraft Loan — Simulation Report</div>
+    <div style="font-size:8pt;color:#888;margin-bottom:6mm;">Generated ${now}&nbsp;·&nbsp;True overdraft model&nbsp;·&nbsp;Daily interest accrual&nbsp;·&nbsp;Auto-debit on 1st of each month</div>`;
+
+  /* Section 1: Loan Summary */
+  if(cfg.summary && calc){
+    html+=`<div class="section"><div class="stitle">Loan Summary</div><div class="grid2"><div>
+      <div class="kv"><span class="kk">Loan Limit</span><span class="kv2 acc">${fmt(calc.loanLimit)}</span></div>
+      <div class="kv"><span class="kk">Rate p.a.</span><span class="kv2">${calc.rate}%</span></div>
+      <div class="kv"><span class="kk">Tenure</span><span class="kv2">${calc.tenure} yrs</span></div>
+      <div class="kv"><span class="kk">EMI</span><span class="kv2">${calc.emi>0?fmt(calc.emi):'N/A'}</span></div>
+      <div class="kv"><span class="kk">Start Date</span><span class="kv2">${calc.startDate||'—'}</span></div>
+      <div class="kv"><span class="kk">First Drawdown</span><span class="kv2">${calc.firstDrawDate||'—'}</span></div>
+      <div class="kv"><span class="kk">Zero-Interest Days</span><span class="kv2 pos">${calc.zeroDays} days</span></div>
+    </div><div>
+      <div class="kv"><span class="kk">Interest Without Deposits</span><span class="kv2 neg">${fmt(calc.shadowCumInt)}</span></div>
+      <div class="kv"><span class="kk">Interest With Deposits</span><span class="kv2 warn">${fmt(calc.cumInterest)}</span></div>
+      <div class="kv"><span class="kk">Deposit Savings</span><span class="kv2 pos">${fmt(calc.depositSavings)}</span></div>
+      <div class="kv"><span class="kk">Total Drawn</span><span class="kv2 neg">${fmt(calc.totalWithdrawn)}</span></div>
+      <div class="kv"><span class="kk">Total Deposited</span><span class="kv2 pos">${fmt(calc.totalDeposited)}</span></div>
+      <div class="kv"><span class="kk">Interest Auto-Debited</span><span class="kv2 neg">${fmt(calc.totalIntDebited)}</span></div>
+      <div class="kv"><span class="kk">Effective Rate p.a.</span><span class="kv2 acc">${calc.effRate.toFixed(3)}%</span></div>
+    </div></div></div>`;
+  }
+
+  /* Section 2: Daily Ledger — built 100% from ledgerData[], zero DOM dependency */
+  if(cfg.ledger && ledgerData.length && SEL.length){
+    /* Row filter — applied to the JS data array, NOT to any DOM element */
+    let dataRows = ledgerData;
+    if     (cfg.rowFilter==='tx')    dataRows = ledgerData.filter(r=>r.hasTx);
+    else if(cfg.rowFilter==='month') dataRows = ledgerData.filter(r=>r.eod && r.isMonthEnd);
+    else                             dataRows = ledgerData.filter(r=>r.hasTx || r.isMonthEnd);
+
+    const colList = SEL.map(c=>c.label).join(' · ');
+    const tbl = buildLedgerTable(SEL, dataRows);
+
+    html+=`<div class="section" style="page-break-before:always;">
+      <div class="stitle">Daily Ledger &nbsp;·&nbsp; ${dataRows.length} rows &nbsp;·&nbsp; ${SEL.length} columns</div>
+      <div style="font-size:7pt;color:#9B8EC7;margin-bottom:4pt;">${colList}</div>
+      <div class="ledger-wrap">${tbl}</div>
+    </div>`;
+  }
+
+  /* Section 3: Snapshots */
+  if(cfg.snaps && snaps.length){
+    const snapCols=[
+      {id:'date', label:'Date'},{id:'label',label:'Label'},{id:'src',label:'Source'},
+      {id:'avail',label:'Available Bal (₹)'},{id:'clear',label:'Clear Bal (₹)'},
+      {id:'int',  label:'Interest Paid (₹)'},{id:'zd',  label:'Zero-Int Days'},
+      {id:'rate', label:'Eff. Rate'},
+    ];
+    const tbl=buildTable(snapCols, snaps, (sn,i)=>`<tr style="background:${i%2?'#FAFAFA':'#FFF'};">
+      <td style="white-space:nowrap;">${new Date(sn.savedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
+      <td style="word-break:break-word;max-width:140pt;">${esc(sn.label)}</td>
+      <td>${esc(sn.source)}</td>
+      <td style="font-family:'Courier New',monospace;color:#4A8892;">${fmt((sn.loanLimit||0)-(sn.drawnBal||0))}</td>
+      <td style="font-family:'Courier New',monospace;font-weight:700;color:#A85060;">${fmt(sn.drawnBal)}</td>
+      <td style="font-family:'Courier New',monospace;">${fmt(sn.interestPaid)}</td>
+      <td style="color:#4A8892;">${sn.zeroDays}</td>
+      <td style="font-family:'Courier New',monospace;">${sn.effRate!=null?sn.effRate.toFixed(3)+'%':'—'}</td>
+    </tr>`);
+    html+=`<div class="section"><div class="stitle">Monthly Snapshots (${snaps.length})</div>${tbl}</div>`;
+  }
+
+  /* Section 4: Actual Transactions */
+  if(cfg.actuals && acts.length){
+    let wit=0, dep=0;
+    acts.forEach(a=>{const v=parseFloat(a.amt)||0; if(a.type==='withdraw')wit+=v; else dep+=v;});
+    const actCols=[{id:'d',label:'Date'},{id:'ds',label:'Description'},{id:'t',label:'Type'},{id:'a',label:'Amount (₹)'}];
+    const tbl=buildTable(actCols, acts, (a,i)=>`<tr style="background:${i%2?'#FAFAFA':'#FFF'};">
+      <td style="white-space:nowrap;">${a.date}</td>
+      <td style="word-break:break-word;max-width:200pt;">${esc(a.desc||'—')}</td>
+      <td style="color:${a.type==='withdraw'?'#A85060':'#4A8892'};font-weight:700;">${a.type}</td>
+      <td style="font-family:'Courier New',monospace;font-weight:700;color:${a.type==='withdraw'?'#A85060':'#4A8892'};">${fmt(parseFloat(a.amt)||0)}</td>
+    </tr>`);
+    html+=`<div class="section"><div class="stitle">Actual Transactions (${acts.length}) &nbsp;·&nbsp; Net drawn: ${fmt(wit-dep)}</div>${tbl}</div>`;
+  }
+
+  /* Section 5: Saved Scenarios */
+  if(cfg.scens && scens.length){
+    const scCols=[
+      {id:'n',label:'Name'},{id:'nt',label:'Notes'},
+      {id:'l',label:'Limit (₹)'},{id:'r',label:'Rate %'},{id:'t',label:'Tenure'},
+      {id:'s',label:'Saved'},{id:'i',label:'Interest (₹)'},{id:'z',label:'Zero Days'},{id:'e',label:'Eff. Rate'},
+    ];
+    const tbl=buildTable(scCols, scens, (sc,i)=>`<tr style="background:${i%2?'#FAFAFA':'#FFF'};">
+      <td style="font-weight:700;word-break:break-word;max-width:120pt;">${esc(sc.name)}</td>
+      <td style="color:#888;word-break:break-word;max-width:120pt;">${esc(sc.notes||'—')}</td>
+      <td style="font-family:'Courier New',monospace;">${sc.setup?.loanAmt?fmt(parseFloat(sc.setup.loanAmt)):'—'}</td>
+      <td>${sc.setup?.rate||'—'}%</td>
+      <td>${sc.setup?.tenure||'—'} yrs</td>
+      <td style="white-space:nowrap;">${new Date(sc.savedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
+      <td style="font-family:'Courier New',monospace;">${sc.calc?fmt(sc.calc.cumInterest):'—'}</td>
+      <td>${sc.calc?sc.calc.zeroDays:'—'}</td>
+      <td>${sc.calc?sc.calc.effRate.toFixed(3)+'%':'—'}</td>
+    </tr>`);
+    html+=`<div class="section"><div class="stitle">Saved Scenarios (${scens.length})</div>${tbl}</div>`;
+  }
+
+  html += `</div>`;
+
+  /* ── 7. Inject into pdfCover and print ── */
+  const cover = document.getElementById('pdfCover');
+  cover.innerHTML = html;
+  cover.style.display = 'block';
+  document.querySelectorAll('.page').forEach(p=>p.style.display='block');
+  window.print();
+  setTimeout(()=>{
+    cover.style.display='none';
+    cover.innerHTML='';
+    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+    const idx=[...document.querySelectorAll('.ntab')].findIndex(b=>b.classList.contains('active'));
+    if(idx>=0) document.querySelectorAll('.page')[idx].style.display='block';
+  }, 800);
+}
   const c=window._lastCalc;
   const snaps=ls().snapshots||[];
   const actuals=gf('actuals',[]);
@@ -2246,7 +2935,7 @@ function exportXLS(){
   let s1='';
   s1+=row(`<Cell ss:StyleID="sect" ss:MergeAcross="3"><Data ss:Type="String">Overdraft Loan Simulation Report — ${now}</Data></Cell>`);
   s1+=blank();
-  if(c){
+  if(cfg.summary && c){
     s1+=row(`<Cell ss:StyleID="sect" ss:MergeAcross="3"><Data ss:Type="String">LOAN PARAMETERS</Data></Cell>`);
     const params=[
       ['Loan Limit (₹)',fmtN(c.loanLimit),'num0'],
@@ -2275,51 +2964,50 @@ function exportXLS(){
       ['Days Before First Drawdown',c.preDays,'pos'],
     ];
     metrics.forEach(([k,v,st])=>{ s1+=row(cell(k,'String','bold')+`<Cell ss:StyleID="${st||'num0'}"><Data ss:Type="Number">${isNaN(v)?0:v}</Data></Cell><Cell/><Cell/>`); });
+  } else if(!cfg.summary){
+    s1+=row(cell('Summary section not included in this export.','String'));
   } else {
     s1+=row(cell('No simulation has been run yet. Go to the Calculator tab and click Run Simulation.','String'));
   }
   const sheet1=`<Worksheet ss:Name="Summary"><Table>${s1}</Table><WorksheetOptions><FitToPage/></WorksheetOptions></Worksheet>`;
 
-  // ── Sheet 2: Daily Ledger ─────────────────────────────
+  // ── Sheet 2: Daily Ledger (selected columns & rows) ──
   let s2='';
-  s2+=hdr(['Date','Description','Type','Transaction (₹)','Available Balance (₹)','Clear Balance (₹)','Daily Interest (₹)','Pending Interest (₹)','Cumulative Interest (₹)']);
-  const grouped={};
-  ledgerData.forEach(r=>{if(!grouped[r.date])grouped[r.date]=[];grouped[r.date].push(r);});
-  ledgerData.forEach(r=>{
-    if(r.eod){
-      const z=r.isZeroInt;
-      s2+=`<Row ss:StyleID="eod">
-        ${cell(r.date,'String','date')}
-        ${cell(r.hasTx?'End of day':'—','String','eod')}
-        ${cell('—','String','eod')}
-        ${cell('—','String','eod')}
-        ${numCell(fmtN(r.available),'num0')}
-        ${numCell(fmtN(r.drawnBal),r.drawnBal>0?'neg':'pos')}
-        ${numCell(z?0:parseFloat(fmtD2(r.dailyInt)),z?'pos':'num')}
-        ${numCell(r.pendingInt>0?parseFloat(fmtD2(r.pendingInt)):0,'num')}
-        ${numCell(parseFloat(fmtD2(r.cumInterest)),'num')}
-      </Row>`;
-    } else {
-      const iRow=r.monthlyIntDebit>0;
-      const txStyle=r.txAmt>0?'neg':r.txAmt<0?'pos':'';
-      s2+=`<Row${iRow?' ss:StyleID="irow"':''}>
-        ${cell(r.date,'String','')}
-        ${cell(r.desc||'—')}
-        ${cell(r.type||'—')}
-        ${r.txAmt?numCell(parseFloat(fmtD2(Math.abs(r.txAmt)))*Math.sign(r.txAmt),txStyle):cell('—')}
-        ${numCell(fmtN(r.available),'num0')}
-        ${numCell(fmtN(r.drawnBal),r.drawnBal>0?'neg':'pos')}
-        ${cell('—')}
-        ${cell('—')}
-        ${cell('—')}
-      </Row>`;
-    }
-  });
+  if(cfg.ledger && ledgerData.length){
+    // column definitions map
+    const xlsColDefs = [
+      {id:'date',  label:'Date',                  eodFn: r=>cell(r.date,'String','date'),         txFn: r=>cell(r.date,'String','')},
+      {id:'desc',  label:'Description',            eodFn: r=>cell(r.hasTx?'End of day':'—'),       txFn: r=>cell(r.desc||'—')},
+      {id:'type',  label:'Type',                   eodFn: r=>cell('—'),                            txFn: r=>cell(r.type||'—')},
+      {id:'tx',    label:'Transaction (₹)',         eodFn: r=>cell('—'),                            txFn: r=>r.txAmt?numCell(parseFloat(fmtD2(Math.abs(r.txAmt)))*Math.sign(r.txAmt),r.txAmt>0?'neg':r.txAmt<0?'pos':''):cell('—')},
+      {id:'avail', label:'Available Balance (₹)',   eodFn: r=>numCell(fmtN(r.available),'num0'),   txFn: r=>numCell(fmtN(r.available),'num0')},
+      {id:'clear', label:'Clear Balance (₹)',       eodFn: r=>numCell(fmtN(r.drawnBal),r.drawnBal>0?'neg':'pos'), txFn: r=>numCell(fmtN(r.drawnBal),r.drawnBal>0?'neg':'pos')},
+      {id:'dint',  label:'Daily Interest (₹)',      eodFn: r=>numCell(r.isZeroInt?0:parseFloat(fmtD2(r.dailyInt)),r.isZeroInt?'pos':'num'), txFn: r=>cell('—')},
+      {id:'pint',  label:'Pending Interest (₹)',    eodFn: r=>numCell(r.pendingInt>0?parseFloat(fmtD2(r.pendingInt)):0,'num'), txFn: r=>cell('—')},
+      {id:'cint',  label:'Cumulative Interest (₹)', eodFn: r=>numCell(parseFloat(fmtD2(r.cumInterest)),'num'), txFn: r=>cell('—')},
+    ];
+    const selXlsCols = xlsColDefs.filter(cd=>cfg.cols.includes(cd.id));
+
+    // Row filter
+    let xlsRows;
+    if(cfg.rowFilter==='tx')    xlsRows=ledgerData.filter(r=>r.hasTx);
+    else if(cfg.rowFilter==='month') xlsRows=ledgerData.filter(r=>r.eod&&r.isMonthEnd);
+    else                        xlsRows=ledgerData;
+
+    s2+=hdr(selXlsCols.map(cd=>cd.label));
+    xlsRows.forEach(r=>{
+      const cells=selXlsCols.map(cd=>r.eod?cd.eodFn(r):cd.txFn(r)).join('');
+      const style=r.eod?' ss:StyleID="eod"':r.monthlyIntDebit>0?' ss:StyleID="irow"':'';
+      s2+=`<Row${style}>${cells}</Row>`;
+    });
+  } else {
+    s2+=row(cell('Ledger section not included in this export.','String'));
+  }
   const sheet2=`<Worksheet ss:Name="Daily Ledger"><Table>${s2}</Table><WorksheetOptions><FreezePanes/><FrozenRowCount>1</FrozenRowCount><ActivePane>2</ActivePane></WorksheetOptions></Worksheet>`;
 
   // ── Sheet 3: Snapshots ───────────────────────────────
   let s3='';
-  if(snaps.length){
+  if(cfg.snaps && snaps.length){
     s3+=hdr(['Date Saved','Label','Source','Available Balance (₹)','Clear Balance (₹)','Interest Paid (₹)','Zero-Interest Days','Effective Rate (%)']);
     snaps.forEach(sn=>{
       s3+=row(
@@ -2332,12 +3020,12 @@ function exportXLS(){
         (sn.effRate!=null?numCell(parseFloat(sn.effRate.toFixed(3)),'acc'):cell('—'))
       );
     });
-  } else { s3+=row(cell('No snapshots saved yet.')); }
-  const sheet3=`<Worksheet ss:Name="Snapshots"><Table>${s3}</Table></Worksheet>`;
+  } else { s3+=row(cell(cfg.snaps?'No snapshots saved yet.':'Snapshots not included in this export.')); }
+  const sheet3=cfg.snaps?`<Worksheet ss:Name="Snapshots"><Table>${s3}</Table></Worksheet>`:'';
 
   // ── Sheet 4: Actual Transactions ─────────────────────
   let s4='';
-  if(actuals.length){
+  if(cfg.actuals && actuals.length){
     let wit=0,dep=0;
     actuals.forEach(a=>{const am=parseFloat(a.amt)||0;if(a.type==='withdraw')wit+=am;else dep+=am;});
     s4+=row(`<Cell ss:StyleID="sect" ss:MergeAcross="3"><Data ss:Type="String">Net Drawn Balance: ₹${fmtN(wit-dep).toLocaleString('en-IN')} (${actuals.length} transactions)</Data></Cell>`);
@@ -2353,12 +3041,12 @@ function exportXLS(){
     s4+=row(cell('Total Withdrawn','String','bold')+cell('')+cell('')+numCell(fmtN(wit),'neg'));
     s4+=row(cell('Total Deposited','String','bold')+cell('')+cell('')+numCell(fmtN(dep),'pos'));
     s4+=row(cell('Net Drawn','String','bold')+cell('')+cell('')+numCell(fmtN(wit-dep),(wit-dep)>0?'neg':'pos'));
-  } else { s4+=row(cell('No actual transactions logged yet.')); }
-  const sheet4=`<Worksheet ss:Name="Actual Transactions"><Table>${s4}</Table></Worksheet>`;
+  } else { s4+=row(cell(cfg.actuals?'No actual transactions logged yet.':'Actual transactions not included in this export.')); }
+  const sheet4=cfg.actuals?`<Worksheet ss:Name="Actual Transactions"><Table>${s4}</Table></Worksheet>`:'';
 
   // ── Sheet 5: Scenarios ───────────────────────────────
   let s5='';
-  if(scenarios.length){
+  if(cfg.scens && scenarios.length){
     s5+=hdr(['Name','Notes','Loan Limit (₹)','Rate (%)','Tenure (Yrs)','Saved On','Interest (₹)','Zero-Int Days','Eff. Rate (%)']);
     scenarios.forEach(sc=>{
       s5+=row(
@@ -2372,221 +3060,68 @@ function exportXLS(){
         (sc.calc?numCell(parseFloat(sc.calc.effRate.toFixed(3)),'acc'):cell('—'))
       );
     });
-  } else { s5+=row(cell('No scenarios saved yet.')); }
-  const sheet5=`<Worksheet ss:Name="Saved Scenarios"><Table>${s5}</Table></Worksheet>`;
+  } else { s5+=row(cell(cfg.scens?'No scenarios saved yet.':'Scenarios not included in this export.')); }
+  const sheet5=cfg.scens?`<Worksheet ss:Name="Saved Scenarios"><Table>${s5}</Table></Worksheet>`:'';
 
-  // ── Assemble workbook ────────────────────────────────
-  const workbook=`<?xml version="1.0" encoding="UTF-8"?>
-<?mso-application progid="Excel.Sheet"?>
-<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:x="urn:schemas-microsoft-com:office:excel">
-  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
-    <Title>Overdraft Loan Simulation</Title>
-    <Author>OD Loan Calculator</Author>
-    <Created>${new Date().toISOString()}</Created>
-  </DocumentProperties>
-  ${styles}
-  ${sheet1}
-  ${sheet2}
-  ${sheet3}
-  ${sheet4}
-  ${sheet5}
-</Workbook>`;
-
-  const blob=new Blob([workbook],{type:'application/vnd.ms-excel;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='overdraft-simulation-'+new Date().toISOString().split('T')[0]+'.xls';
-  a.click();
-  URL.revokeObjectURL(a.href);
-  toast('Excel workbook exported — 5 sheets');
-}
-
-function exportPDF(){
-  const c=window._lastCalc,snaps=ls().snapshots||[],actuals=gf('actuals',[]),scenarios=ls().scenarios||[];
-  const now=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-
-  // ── Shared print styles injected into the cover div ──
-  const printStyles=`
-    <style>
-      .pdf-section{margin-bottom:8mm;}
-      .pdf-h1{font-size:20pt;font-weight:900;margin-bottom:3mm;color:#2A2035;}
-      .pdf-sub{font-size:9pt;color:#6B7280;margin-bottom:7mm;}
-      .pdf-box{border:.5pt solid #DDD;border-radius:4pt;padding:10pt 12pt;margin-bottom:6mm;page-break-inside:avoid;}
-      .pdf-section-title{font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#9B8EC7;margin-bottom:6pt;border-bottom:.5pt solid #E8E0F0;padding-bottom:4pt;}
-      .pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8pt;}
-      .pdf-row{display:flex;justify-content:space-between;font-size:9pt;padding:4pt 0;border-bottom:.5pt solid #EEE;}
-      .pdf-row:last-child{border-bottom:none;}
-      .pdf-k{color:#5A4E6A;}.pdf-v{font-weight:700;font-family:'Courier New',monospace;font-size:9pt;}
-      .pdf-v-pos{color:#4A8892;}.pdf-v-neg{color:#A85060;}.pdf-v-warn{color:#8C6B3E;}.pdf-v-acc{color:#7F72B0;}
-      table.pdf-tbl{width:100%;border-collapse:collapse;font-size:7.5pt;margin-top:4pt;}
-      table.pdf-tbl th{font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6B7280;background:#F5F0F8;padding:5pt 7pt;border:.5pt solid #E0D8EC;text-align:left;white-space:nowrap;}
-      table.pdf-tbl td{padding:4pt 7pt;border:.5pt solid #EEE;font-size:7.5pt;white-space:nowrap;font-family:'Courier New',monospace;}
-      table.pdf-tbl td.desc-col{font-family:inherit;white-space:normal;word-break:break-word;max-width:200pt;}
-      table.pdf-tbl tr:nth-child(even) td{background:#FAF8FC;}
-      table.pdf-tbl tr.eod-row td{background:#F5F0F8;color:#5A4E6A;font-size:7pt;font-style:italic;}
-      table.pdf-tbl tr.int-row td{background:#FDF0EF;}
-      .badge-dep{background:#E6F7F1;color:#4A8892;padding:1pt 5pt;border-radius:99pt;font-size:6.5pt;font-weight:700;font-family:inherit;}
-      .badge-wit{background:#FDF0EF;color:#A85060;padding:1pt 5pt;border-radius:99pt;font-size:6.5pt;font-weight:700;font-family:inherit;}
-      .badge-int{background:#FEF3E7;color:#8C6B3E;padding:1pt 5pt;border-radius:99pt;font-size:6.5pt;font-weight:700;font-family:inherit;}
-    </style>`;
-
-  let html=printStyles+`<div class="pdf-section">
-    <div class="pdf-h1">Overdraft Loan — Full Simulation Report</div>
-    <div class="pdf-sub">Generated ${now} &nbsp;·&nbsp; True overdraft model &nbsp;·&nbsp; Daily interest accrual &nbsp;·&nbsp; Interest auto-debited on 1st of each month</div>`;
-
-  // ── 1. Loan Summary ──
-  if(c){
-    html+=`<div class="pdf-box">
-      <div class="pdf-section-title">Loan Summary</div>
-      <div class="pdf-grid">
-        <div>
-          <div class="pdf-row"><span class="pdf-k">Loan Limit</span><span class="pdf-v pdf-v-acc">${fmt(c.loanLimit)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Interest Rate</span><span class="pdf-v">${c.rate}% p.a.</span></div>
-          <div class="pdf-row"><span class="pdf-k">Tenure</span><span class="pdf-v">${c.tenure} years</span></div>
-          <div class="pdf-row"><span class="pdf-k">Monthly EMI</span><span class="pdf-v">${c.emi>0?fmt(c.emi):'N/A — entered manually'}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Approval Date</span><span class="pdf-v">${c.startDate}</span></div>
-          <div class="pdf-row"><span class="pdf-k">First Drawdown</span><span class="pdf-v">${c.firstDrawDate||'—'}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Zero-Interest Days</span><span class="pdf-v pdf-v-pos">${c.zeroDays} days</span></div>
-        </div>
-        <div>
-          <div class="pdf-row"><span class="pdf-k">Total Drawn</span><span class="pdf-v pdf-v-neg">${fmt(c.totalWithdrawn)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Total Deposited</span><span class="pdf-v pdf-v-pos">${fmt(c.totalDeposited)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Interest Without Deposits</span><span class="pdf-v pdf-v-neg">${fmt(c.shadowCumInt)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Interest With Deposits</span><span class="pdf-v pdf-v-warn">${fmt(c.cumInterest)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Deposit Savings</span><span class="pdf-v pdf-v-pos">${fmt(c.depositSavings)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Interest Auto-Debited</span><span class="pdf-v pdf-v-neg">${fmt(c.totalIntDebited)}</span></div>
-          <div class="pdf-row"><span class="pdf-k">Effective Rate p.a.</span><span class="pdf-v pdf-v-acc">${c.effRate.toFixed(3)}%</span></div>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  // ── 2. Daily Simulation Ledger (all columns) ──
-  if(ledgerData&&ledgerData.length){
-    // For PDF: show transaction days + month-end rows to keep it manageable
-    // but always include all columns
-    const pdfRows=ledgerData.filter(r=>r.hasTx||r.isMonthEnd);
-    const grouped={};
-    pdfRows.forEach(r=>{if(!grouped[r.date])grouped[r.date]=[];grouped[r.date].push(r);});
-
-    html+=`<div class="pdf-box" style="page-break-before:always;">
-      <div class="pdf-section-title">Transaction &amp; Daily Ledger (Transaction days + Month-end · ${pdfRows.length} rows)</div>
-      <table class="pdf-tbl">
-        <thead><tr>
-          <th>Date</th><th>Description</th><th>Type</th><th>Transaction (₹)</th>
-          <th>Available Balance (₹)</th><th>Clear Balance (₹)</th>
-          <th>Daily Interest (₹)</th><th>Pending Interest (₹)</th><th>Cumulative Interest (₹)</th>
-        </tr></thead>
-        <tbody>`;
-
-    pdfRows.forEach(r=>{
-      const grp=grouped[r.date],isFirst=grp&&grp[0]===r,rowspan=grp?grp.length:1;
-      const dateCell=isFirst?`<td rowspan="${rowspan}" style="vertical-align:top;font-weight:600;">${r.date}</td>`:'';
-
-      if(r.eod){
-        const z=r.isZeroInt;
-        html+=`<tr class="eod-row">
-          ${dateCell}
-          <td class="desc-col" colspan="3" style="font-style:italic;">${r.hasTx?'End of day':'—'}</td>
-          <td>${fmt(r.available)}</td>
-          <td style="font-weight:700;color:${r.drawnBal>0?'#A85060':'#4A8892'};">${fmt(r.drawnBal)}</td>
-          <td style="color:${z?'#4A8892':'#8C6B3E'};font-weight:${z?700:400};">${z?'₹0.00 — NIL':fmtD(r.dailyInt)}</td>
-          <td style="color:${r.pendingInt>0?'#8C6B3E':'#999'};">${r.pendingInt>0?fmtD(r.pendingInt):'—'}</td>
-          <td style="color:#5A4E6A;">${fmtD(r.cumInterest)}</td>
-        </tr>`;
-      } else {
-        const iRow=r.monthlyIntDebit>0;
-        const tC=r.txAmt>0?'#A85060':r.txAmt<0?'#4A8892':'#999';
-        const tS=r.txAmt>0?'−':r.txAmt<0?'+':'';
-        const badge=r.type==='withdraw'?`<span class="badge-wit">withdraw</span>`
-                   :r.type==='deposit'?`<span class="badge-dep">deposit</span>`
-                   :r.type==='interest'?`<span class="badge-int">interest</span>`:'—';
-        html+=`<tr${iRow?' class="int-row"':''}>
-          ${dateCell}
-          <td class="desc-col" style="font-weight:${iRow?700:400};">${esc(r.desc||'—')}</td>
-          <td>${badge}</td>
-          <td style="color:${tC};font-weight:700;">${r.txAmt?tS+fmt(Math.abs(r.txAmt)):'—'}</td>
-          <td>${fmt(r.available)}</td>
-          <td style="font-weight:700;color:${r.drawnBal>0?'#A85060':'#4A8892'};">${fmt(r.drawnBal)}</td>
-          <td style="font-style:italic;color:#AAA;">—</td>
-          <td style="font-style:italic;color:#AAA;">—</td>
-          <td style="font-style:italic;color:#AAA;">—</td>
-        </tr>`;
-      }
-    });
-    html+=`</tbody></table></div>`;
-  }
-
-  // ── 3. Monthly Snapshots ──
-  if(snaps.length){
-    html+=`<div class="pdf-box">
-      <div class="pdf-section-title">Monthly Snapshots (${snaps.length})</div>
-      <table class="pdf-tbl"><thead><tr>
-        <th>Date</th><th>Label</th><th>Source</th><th>Available Bal (₹)</th>
-        <th>Clear Bal (₹)</th><th>Interest Paid (₹)</th><th>Zero-Int Days</th><th>Eff. Rate</th>
-      </tr></thead><tbody>
-      ${snaps.map(sn=>`<tr>
-        <td>${new Date(sn.savedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
-        <td class="desc-col">${esc(sn.label)}</td><td>${sn.source}</td>
-        <td style="color:#4A8892;">${fmt((sn.loanLimit||0)-(sn.drawnBal||0))}</td>
-        <td style="color:#A85060;font-weight:700;">${fmt(sn.drawnBal)}</td>
-        <td>${fmt(sn.interestPaid)}</td>
-        <td style="color:#4A8892;">${sn.zeroDays} days</td>
-        <td>${sn.effRate!=null?sn.effRate.toFixed(3)+'%':'—'}</td>
-      </tr>`).join('')}
-      </tbody></table></div>`;
-  }
-
-  // ── 4. Actual Transactions ──
-  if(actuals.length){
-    let wit=0,dep=0;
-    actuals.forEach(a=>{const am=parseFloat(a.amt)||0;if(a.type==='withdraw')wit+=am;else dep+=am;});
-    html+=`<div class="pdf-box">
-      <div class="pdf-section-title">Actual Transactions (${actuals.length}) &nbsp;·&nbsp; Net drawn: ${fmt(wit-dep)}</div>
-      <table class="pdf-tbl"><thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Amount (₹)</th></tr></thead><tbody>
-      ${actuals.map(a=>`<tr>
-        <td>${a.date}</td>
-        <td class="desc-col">${esc(a.desc)}</td>
-        <td><span class="${a.type==='withdraw'?'badge-wit':'badge-dep'}">${a.type}</span></td>
-        <td style="color:${a.type==='withdraw'?'#A85060':'#4A8892'};font-weight:700;">${fmt(parseFloat(a.amt)||0)}</td>
-      </tr>`).join('')}
-      </tbody></table></div>`;
-  }
-
-  // ── 5. Saved Scenarios ──
-  if(scenarios.length){
-    html+=`<div class="pdf-box">
-      <div class="pdf-section-title">Saved Scenarios (${scenarios.length})</div>
-      ${scenarios.map(sc=>`
-        <div style="padding:5pt 0;border-bottom:.5pt solid #EEE;">
-          <span style="font-weight:700;font-size:9pt;">${esc(sc.name)}</span>
-          <span style="color:#6B7280;font-size:8pt;margin-left:6pt;">
-            ${sc.setup?.loanAmt?fmt(parseFloat(sc.setup.loanAmt)):'—'} · ${sc.setup?.rate||'—'}% · ${sc.setup?.tenure||'—'} yrs
-            ${sc.calc?' · Interest '+fmt(sc.calc.cumInterest)+' · '+sc.calc.zeroDays+' zero days':''}
-          </span>
-          ${sc.notes?`<div style="font-size:8pt;color:#9CA3AF;margin-top:2pt;">${esc(sc.notes)}</div>`:''}
-        </div>`).join('')}
-    </div>`;
-  }
-
-  html+=`</div>`;
-
-  const el=document.getElementById('pdfCover');
-  el.innerHTML=html;
-  el.style.display='block';
-  document.querySelectorAll('.page').forEach(p=>p.style.display='block');
-  window.print();
-  setTimeout(()=>{
-    el.style.display='none';el.innerHTML='';
-    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-    const idx=[...document.querySelectorAll('.ntab')].findIndex(b=>b.classList.contains('active'));
-    if(idx>=0)document.querySelectorAll('.page')[idx].style.display='block';
-  },800);
-}
-window.addEventListener('beforeprint',()=>{document.querySelectorAll('.page').forEach(p=>p.style.display='block');});
 window.addEventListener('afterprint',()=>{document.querySelectorAll('.page').forEach(p=>p.style.display='none');const idx=[...document.querySelectorAll('.ntab')].findIndex(b=>b.classList.contains('active'));if(idx>=0)document.querySelectorAll('.page')[idx].style.display='block';document.getElementById('pdfCover').style.display='none';document.getElementById('pdfCover').innerHTML='';});
+
+/* ── EXPORT MODAL CONTROLLER ─────────────────────────
+   Reads user column/section/format selections and calls
+   the appropriate export function with a config object.
+──────────────────────────────────────────────────────*/
+function openExportModal(){
+  // Disable ledger-cols section if ledger section unchecked
+  document.getElementById('sec-ledger').addEventListener('change', e=>{
+    document.getElementById('ledgerColsSection').style.opacity = e.target.checked ? '1' : '0.4';
+    document.getElementById('ledgerColsSection').style.pointerEvents = e.target.checked ? '' : 'none';
+  });
+  document.getElementById('exportModal').classList.add('open');
+}
+
+function toggleAllSections(on){
+  ['sec-summary','sec-ledger','sec-snaps','sec-actuals','sec-scens'].forEach(id=>{
+    document.getElementById(id).checked = on;
+  });
+  document.getElementById('ledgerColsSection').style.opacity = on ? '1' : '0.4';
+}
+
+function toggleAllCols(on){
+  ['col-date','col-desc','col-type','col-tx','col-avail','col-clear','col-dint','col-pint','col-cint'].forEach(id=>{
+    document.getElementById(id).checked = on;
+  });
+}
+
+function getExportConfig(){
+  const cols = ['date','desc','type','tx','avail','clear','dint','pint','cint'];
+  const colLabels = {
+    date:'Date', desc:'Description', type:'Type', tx:'Transaction (₹)',
+    avail:'Available Balance (₹)', clear:'Clear Balance (₹)',
+    dint:'Daily Interest (₹)', pint:'Pending Interest (₹)', cint:'Cumulative Interest (₹)'
+  };
+  const selectedCols = cols.filter(c => document.getElementById('col-'+c)?.checked);
+  const rowFilter = document.querySelector('input[name="expRows"]:checked')?.value || 'all';
+  return {
+    fmt:      document.querySelector('input[name="exportFmt"]:checked')?.value || 'pdf',
+    summary:  document.getElementById('sec-summary')?.checked ?? true,
+    ledger:   document.getElementById('sec-ledger')?.checked  ?? true,
+    snaps:    document.getElementById('sec-snaps')?.checked   ?? true,
+    actuals:  document.getElementById('sec-actuals')?.checked ?? true,
+    scens:    document.getElementById('sec-scens')?.checked   ?? true,
+    cols:     selectedCols,
+    colLabels,
+    rowFilter,
+  };
+}
+
+function runExport(){
+  const cfg = getExportConfig();
+  closeModal();
+  if(cfg.cols.length === 0 && cfg.ledger){
+    toast('Select at least one ledger column', 1); return;
+  }
+  if(cfg.fmt === 'pdf') exportPDF(cfg);
+  else                  exportXLS(cfg);
+}
 
 function closeModal(){document.querySelectorAll('.mbg').forEach(m=>m.classList.remove('open'));}
 document.querySelectorAll('.mbg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal();}));
